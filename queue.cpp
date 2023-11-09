@@ -1,0 +1,90 @@
+#include <iostream>
+
+using namespace std;
+
+struct Node {
+    int data;
+    Node *next;
+};
+
+Node *first = nullptr;
+Node *last = nullptr;
+
+
+void push(int data ) {
+    Node *tmp = new Node();
+    tmp->data = data;
+    tmp->next = nullptr;
+
+    if(first == nullptr) {
+        first = tmp;
+        last = tmp;
+        first->next=last;
+        return;
+    }
+
+    last->next = tmp;
+    last = tmp;
+
+
+}
+
+void pop() {
+    if(first == nullptr) {
+        cout << "Queue is empty.";
+        return;
+    }
+    if(first == last){
+        first = nullptr;
+        last = nullptr;
+
+        return;
+    }
+    Node *tmp = first;
+    first = tmp->next;
+
+
+}
+
+void peek() {
+    if(first == nullptr) {
+        cout << "Queue is empty.";
+        return;
+    }
+    cout << "First: " << first->data;
+
+}
+
+
+int main()
+{
+     bool loop = true;
+    do {
+        int opt;
+        cout <<"1. Push\n2. Pop\n3. Peek\n4.Exit" << endl;
+        cin >> opt;
+        switch(opt) {
+        case 1:
+            int value;
+            cout << "Input value: ";
+            cin >> value;
+            push(value);
+            break;
+        case 2:
+            pop();
+            break;
+        case 3:
+            peek();
+            break;
+        case 4:
+            loop = false;
+            break;
+        default:
+            cout << "Invalid option.";
+            break;
+        }
+        cout << endl << endl;
+    } while(loop);
+
+    return 0;
+}
